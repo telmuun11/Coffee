@@ -10,6 +10,7 @@ import {
   Dimensions,
   Touchable,
   TouchableHighlight,
+
 } from 'react-native';
 import data from '../../mock_data';
 
@@ -21,20 +22,27 @@ interface dataType {
   id: number;
   price: number;
 }
-const Item = ({item}: {item: dataType}) => (
+const Item = ({item ,navigation}: {item: dataType, navigation :any}) => (
   <View style={styles.box}>
-    <Image
+    <TouchableHighlight onPress={() => navigation.navigate("Detail" , {id:item.id})}>
+    <Image 
       style={styles.img}
       source={require('../assets/img1.png')}
     />
+    </TouchableHighlight>
+  
 
     <Text style={styles.title}>{item.title}</Text>
     <Text>${item.price}/spruce</Text>
   </View>
 )
+
+
 const wWidth = Dimensions.get('window').width;
 const wHeight = Dimensions.get('window').height;
 const margin: number = (wWidth - 344) / 2;
+
+
 const HomeScreen = ({navigation}: any) => {
   return (
     <View>
@@ -56,17 +64,8 @@ const HomeScreen = ({navigation}: any) => {
 
             <FlatList
               data={data}
-              renderItem={({item}: {item: dataType}) => (
-                <View style={styles.box}>
-                  <Image
-                    style={styles.img}
-                    source={require('../assets/img1.png')}
-                  />
 
-                  <Text style={styles.title}>{item.title}</Text>
-                  <Text>${item.price}/spruce</Text>
-                </View>
-              )}
+              renderItem={({item}: {item: dataType}) => <Item navigation={navigation} item={item} />}
               horizontal={true}
             />
 
@@ -75,20 +74,8 @@ const HomeScreen = ({navigation}: any) => {
           <ScrollView>
             <FlatList
               data={data}
-              renderItem={({item}: {item: dataType}) => (
-                <View style={styles.box}>
-                  <TouchableHighlight>
-                    {/* onPress={ navigation.navigate('Detail', {id: item.id}) } > */}
-                    <Image
-                      style={styles.img}
-                      source={require('../assets/img1.png')}
-                    />
-                  </TouchableHighlight>
+              renderItem={({item}: {item: dataType}) => <Item navigation={navigation} item={item} />}
 
-                  <Text style={styles.title}>{item.title}</Text>
-                  <Text>${item.price}/spruce</Text>
-                </View>
-              )}
               horizontal={true}
             />
           </ScrollView>
