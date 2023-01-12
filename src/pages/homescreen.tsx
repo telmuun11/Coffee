@@ -1,4 +1,4 @@
-import React, {type PropsWithChildren} from 'react';
+import React, {useState, type PropsWithChildren} from 'react';
 
 import {
   FlatList,
@@ -22,9 +22,10 @@ interface dataType {
   id: number;
   price: number;
 }
+
 const Item = ({item ,navigation}: {item: dataType, navigation :any}) => (
   <View style={styles.box}>
-    <TouchableHighlight onPress={() => navigation.navigate("Detail" , {id:item.id})}>
+    <TouchableHighlight onPress={() => {navigation.navigate("Detail" , {id:item.id})}}>
     <Image 
       style={styles.img}
       source={require('../assets/img1.png')}
@@ -46,6 +47,8 @@ const margin: number = (wWidth - 344) / 2;
 const HomeScreen = ({navigation}: any) => {
   return (
     <View>
+
+
       <Image style={styles.img3} source={require('../assets/head.png')} />
       <View style={styles.nav}>
         <View style={styles.box1}>
@@ -83,6 +86,8 @@ const HomeScreen = ({navigation}: any) => {
           <View style={styles.vug}></View>
         </ScrollView>
       </View>
+
+
     </View>
   );
 };
