@@ -10,7 +10,6 @@ import {
   Dimensions,
   Touchable,
   TouchableHighlight,
-
 } from 'react-native';
 import data from '../../mock_data';
 
@@ -23,26 +22,23 @@ interface dataType {
   price: number;
 }
 
-const Item = ({item ,navigation}: {item: dataType, navigation :any}) => (
+const Item = ({item, navigation}: {item: dataType; navigation: any}) => (
   <View style={styles.box}>
-    <TouchableHighlight onPress={() => {navigation.navigate("Detail" , {id:item.id})}}>
-    <Image 
-      style={styles.img}
-      source={require('../assets/img1.png')}
-    />
+    <TouchableHighlight
+      onPress={() => {
+        navigation.navigate('Detail', {id: item.id});
+      }}>
+      <Image style={styles.img} source={require('../assets/img1.png')} />
     </TouchableHighlight>
-  
 
     <Text style={styles.title}>{item.title}</Text>
     <Text>${item.price}/spruce</Text>
   </View>
-)
-
+);
 
 const wWidth = Dimensions.get('window').width;
 const wHeight = Dimensions.get('window').height;
 const margin: number = (wWidth - 344) / 2;
-
 
 const HomeScreen = ({navigation}: any) => {
   return (
@@ -50,35 +46,36 @@ const HomeScreen = ({navigation}: any) => {
 
 
       <Image style={styles.img3} source={require('../assets/head.png')} />
+      
       <View style={styles.nav}>
         <View style={styles.box1}>
           <Text style={styles.t1}>Pick-up store</Text>
           <Text style={styles.t2}>Barkley village * 0.5 mi</Text>
         </View>
-
         <Text style={styles.arrow}>{'>'}</Text>
       </View>
+
 
       <View style={styles.cont}>
         <ScrollView>
           <Image style={styles.img2} source={require('../assets/img2.png')} />
           <Text style={[styles.title, styles.f600]}>Your Favorite</Text>
           <ScrollView>
-
             <FlatList
               data={data}
-
-              renderItem={({item}: {item: dataType}) => <Item navigation={navigation} item={item} />}
+              renderItem={({item}: {item: dataType}) => (
+                <Item navigation={navigation} item={item} />
+              )}
               horizontal={true}
             />
-
           </ScrollView>
           <Text style={[styles.title, styles.f600]}>Seasonal drinks</Text>
           <ScrollView>
             <FlatList
               data={data}
-              renderItem={({item}: {item: dataType}) => <Item navigation={navigation} item={item} />}
-
+              renderItem={({item}: {item: dataType}) => (
+                <Item navigation={navigation} item={item} />
+              )}
               horizontal={true}
             />
           </ScrollView>
@@ -86,8 +83,6 @@ const HomeScreen = ({navigation}: any) => {
           <View style={styles.vug}></View>
         </ScrollView>
       </View>
-
-
     </View>
   );
 };
@@ -105,6 +100,7 @@ const styles = StyleSheet.create({
     height: 240,
     width: 160,
   },
+ 
   w100: {
     width: '100%',
   },
@@ -147,6 +143,7 @@ const styles = StyleSheet.create({
     fontWeight: '300',
     color: '#2D2A2B',
   },
+ 
   t1: {
     fontFamily: 'Helvetica Neue',
     fontStyle: 'normal',
